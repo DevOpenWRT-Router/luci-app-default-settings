@@ -180,6 +180,7 @@ echo vm.swappiness=0 >>$SYSCTL_LOCAL
 
 echo 'hsts=0' > /root/.wgetrc
 
+cp -pR /www/cgi-bin/* /www/
 rm -rf /tmp/luci-*
 
 uci -q set base_config.@status[0].version=$version
