@@ -169,4 +169,7 @@ echo 'hsts=0' > /root/.wgetrc
 rm -rf /tmp/luci-modulecache/
 rm -f /tmp/luci-indexcache
 
+uci -q set base_config.@status[0].version=$version
+uci commit base_config
+
 exit 0
