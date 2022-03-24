@@ -51,6 +51,11 @@ set network.wan.ipv6='auto'
 EOF
 uci commit network
 
+if [ "$(uci -q get dhcp.@dnsmasq[0].port)" != "53" ]; then
+	uci -q set dhcp.@dnsmasq[0].port='53'
+	uci commit dhcp
+fi
+
 rm -f /usr/lib/lua/luci/view/admin_status/index/ddns.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/minidlna.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
