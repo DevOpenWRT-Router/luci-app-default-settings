@@ -14,6 +14,9 @@ uci commit luci
 uci set fstab.@global[0].anon_mount=1
 uci commit fstab
 
+uci -q set upnpd.config.enabled='1'
+uci commit upnpd
+
 uci -q batch <<-EOF
 uci set system.@system[0].timezone=UTC
 uci set system.@system[0].zonename=America/New York
