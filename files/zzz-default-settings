@@ -5,6 +5,8 @@
 # Updated On: 09/05/2021                                          #
 ###################################################################
 
+version=`uci -q get base_config.@status[0].version`
+
 uci set luci.main.lang=auto
 uci commit luci
 
