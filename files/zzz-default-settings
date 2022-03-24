@@ -36,6 +36,16 @@ set dhcp.lan.force='1'
 EOF
 uci commit dhcp
 
+uci -q batch <<-EOF
+set network.@globals[0].ula_prefix=''
+set network.lan.delegate='0'
+set network.wan.mtu=1460
+set network.wan.metric='41'
+set network.wan.delegate='0'
+set network.wan.ipv6='auto'
+EOF
+uci commit network
+
 
 # rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
 # rm -f /usr/lib/lua/luci/view/admin_status/index/upnp.htm
