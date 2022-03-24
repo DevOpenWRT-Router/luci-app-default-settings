@@ -61,6 +61,11 @@ if [ "$(uci -q get dhcp.@dnsmasq[0].port)" != "53" ]; then
 	uci commit dhcp
 fi
 
+echo $(uci -q get uhttpd.main.index_page) | grep -q "cgi-bin/luci" ||
+	uci -q add_list uhttpd.main.index_page='cgi-bin/luci' && uci commit uhttpd
+/etc/init.d/wizard disable
+
+
 rm -f /usr/lib/lua/luci/view/admin_status/index/ddns.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/minidlna.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
