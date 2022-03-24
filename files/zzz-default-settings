@@ -88,8 +88,10 @@ echo 'iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53'
 #echo '[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53' >> /etc/firewall.user
 #echo '[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53' >> /etc/firewall.user
 
-# sed -i '/option disabled/d' /etc/config/wireless
-# sed -i '/set wireless.radio${devidx}.disabled/d' /lib/wifi/mac80211.sh
+## Lets Keep Wireless Enabled
+sed -i '/option disabled/d' /etc/config/wireless
+sed -i '/set wireless.radio${devidx}.disabled/d' /lib/wifi/mac80211.sh
+wifi up
 
 # sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
 # echo "DISTRIB_REVISION='R21.8.6'" >> /etc/openwrt_release
