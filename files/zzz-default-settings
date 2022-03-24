@@ -20,6 +20,23 @@ uci commit system
 uci set fstab.@global[0].anon_mount=1
 uci commit fstab
 
+uci -q batch <<-EOF
+set dhcp.@dnsmasq[0].cachesize='1500'
+set dhcp.@dnsmasq[0].min_ttl='3600'
+set dhcp.@dnsmasq[0].filter_aaaa='0'
+set dhcp.@dnsmasq[0].localservice='0'
+set dhcp.@dnsmasq[0].nonwildcard='0'
+set dhcp.lan.ndp=''
+set dhcp.lan.ra='hybrid'
+set dhcp.lan.dhcpv6='hybrid'
+set dhcp.lan.ignore='0'
+set dhcp.lan.ra_management='1'
+set dhcp.lan.ra_default='1'
+set dhcp.lan.force='1'
+EOF
+uci commit dhcp
+
+
 # rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
 # rm -f /usr/lib/lua/luci/view/admin_status/index/upnp.htm
 # rm -f /usr/lib/lua/luci/view/admin_status/index/ddns.htm
