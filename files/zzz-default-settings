@@ -149,6 +149,21 @@ else
 	nf_conntrack_max=16384
 fi
 
+test $version -lt 1 && {
+	uci -q get dhcp.@dnsmasq[0] || uci -q add dhcp dnsmasq
+	uci -q set dhcp.@dnsmasq[0].cachesize="$cachesize"
+	uci -q set dhcp.@dnsmasq[0].dnsforwardmax="$dnsforwardmax"
+	uci -q set dhcp.@dnsmasq[0].localservice='0'
+	uci -q set dhcp.@dnsmasq[0].localise_queries='1'
+	uci -q set dhcp.@dnsmasq[0].rebind_protection='0'
+	uci -q set dhcp.@dnsmasq[0].rebind_localhost='1'
+	uci commit dhcp
+	uci -q set system.@system[0].zram_comp_algo='zstd'
+	uci -q set system.@system[0].zram_size_mb="$(expr $memtotal / 1024 / 3)"
+	uci commit system
+	version=1
+}
+
 echo 'hsts=0' > /root/.wgetrc
 
 rm -rf /tmp/luci-modulecache/
