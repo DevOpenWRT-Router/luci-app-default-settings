@@ -103,6 +103,26 @@ sed -i '/tomato/d' /etc/opkg/distfeeds.conf
 
 ln -sf /sbin/ip /usr/bin/ip
 
+### ---------------------------------------------------------------------------------------------------------- ###
+##### SPECIAL MODIFICATIONS #####
+##### --------------------- #####
+###  Modify the host name, the OpenWrt-123 modifications you like on the line (not pure digital or use Chinese)
+# sed -i '/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-123''
+
+### Modify the version number
+# sed -i "s/OpenWrt /PureFusion build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g"
+
+###  The version number is displayed in its own name (281.67716 million  Build  $ (TZ = UTC-8  DATE  "+% Y.% m.% D")  @  These are the increase of)
+# sed -i "s/OpenWrt /Compiled By Liukai On $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g"
+
+### Set the  password to be empty (you do not need a password to log in when installing the firmware, and then modify the password you want)
+# sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g'
+
+### Delete the default password
+# sed -i "/CYXluq4wUazHjmCDBCqXF/d"
+
+### ---------------------------------------------------------------------------------------------------------- ###
+
 #sed -i 's#downloads.openwrt.org#mirrors.cloud.tencent.com/lede#g' /etc/opkg/distfeeds.conf
 #sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' /etc/shadow
 
