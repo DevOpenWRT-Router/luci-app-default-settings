@@ -39,8 +39,33 @@ define Build/Compile
 endef
 
 define Package/default-settings/install
+  echo $(BOARD)$(TARGETID)
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_BIN) ./files/zzz-default-settings $(1)/etc/uci-defaults/99-default-settings
+
+  $(INSTALL_DIR) $(1)/bin
+  $(INSTALL_BIN) ./files/bin/* $(1)/bin
+
+  $(INSTALL_DIR) $(1)/sbin
+  $(INSTALL_BIN) ./files/sbin/* $(1)/sbin
+
+  $(INSTALL_DIR) $(1)/usr/bin
+  $(INSTALL_BIN) ./files/usr/bin/* $(1)/usr/bin
+
+  $(INSTALL_DIR) $(1)/usr/lib/lua/luci/view/admin_status/index/links.htm
+  $(INSTALL_BIN) ./files/usr/lib/lua/luci/view/admin_status/index/links.htm $(1)/usr/lib/lua/luci/view/admin_status/index/links.htm
+
+  $(INSTALL_DIR) $(1)/etc/config
+  $(INSTALL_BIN) ./files/etc/config/* $(1)/etc/config
+
+  $(INSTALL_DIR) $(1)/etc/init.d
+  $(INSTALL_BIN) ./files/etc/init.d/* $(1)/etc/init.d
+
+  $(INSTALL_DIR) $(1)/etc/profile.d
+  $(INSTALL_BIN) ./files/etc/profile.d/* $(1)/etc/profile.d
+
+  $(INSTALL_DIR) $(1)/etc/rc.d
+  $(INSTALL_BIN) ./files/etc/rc.d/* $(1)/etc/rc.d
 endef
 
 $(eval $(call BuildPackage,default-settings))
