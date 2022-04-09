@@ -3,6 +3,7 @@
 #
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
+# SUBMENU:=3. Applications
 
 include $(TOPDIR)/rules.mk
 
@@ -41,7 +42,7 @@ endef
 define Package/default-settings/install
   echo $(BOARD)$(TARGETID)
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
-	$(INSTALL_BIN) ./files/zzz-default-settings $(1)/etc/uci-defaults/99-default-settings
+	$(INSTALL_CONF) ./files/zzz-default-settings $(1)/etc/uci-defaults/99-default-settings
 
   $(INSTALL_DIR) $(1)/bin
   $(INSTALL_BIN) ./files/bin/* $(1)/bin
@@ -56,7 +57,7 @@ define Package/default-settings/install
   $(INSTALL_BIN) ./files/usr/lib/lua/luci/view/admin_status/index/links.htm $(1)/usr/lib/lua/luci/view/admin_status/index/links.htm
 
   $(INSTALL_DIR) $(1)/etc/config
-  $(INSTALL_BIN) ./files/etc/config/* $(1)/etc/config
+  $(INSTALL_CONF) ./files/etc/config/* $(1)/etc/config
 
   $(INSTALL_DIR) $(1)/etc/init.d
   $(INSTALL_BIN) ./files/etc/init.d/* $(1)/etc/init.d
