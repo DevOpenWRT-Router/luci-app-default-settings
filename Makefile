@@ -22,16 +22,16 @@ define Package/default-settings
   DEPENDS:=+luci-base +luci
 endef
 
+define Package/default-settings/description
+	Language Support Packages.
+endef
+
 define Package/$(PKG_NAME)/conffiles
 /etc/config/
 endef
 
 define Build/Prepare
 	chmod -R +x ./files/bin ./files/sbin ./files/etc/profile.d ./files/etc/rc.d ./files/usr/share target/*/{*,}/files/{etc/init.d,usr/bin} >/dev/null || true
-endef
-
-define Package/default-settings/description
-	Language Support Packages.
 endef
 
 define Build/Compile
